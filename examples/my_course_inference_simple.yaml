@@ -1,0 +1,3 @@
+# Model arguments
+model_name_or_path: ./output/my_course_sft  # 直接使用训练输出目录
+template: qwen

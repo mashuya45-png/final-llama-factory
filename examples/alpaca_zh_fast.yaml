@@ -1,0 +1,41 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B
+template: qwen
+
+# Data training arguments
+dataset: alpaca_zh_local
+cutoff_len: 512  # 减少序列长度
+overwrite_cache: true
+max_samples: 1000  # 限制训练样本数量
+
+# Training arguments
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: q_proj,v_proj  # 只训练关键层，减少参数
+output_dir: ./output/alpaca_zh_fast
+overwrite_output_dir: true
+
+# 优化的训练参数
+per_device_train_batch_size: 4  # 增加批量大小
+gradient_accumulation_steps: 2  # 减少梯度累积
+learning_rate: 3.0e-4  # 提高学习率
+num_train_epochs: 2.0  # 减少训练轮数
+max_steps: 500  # 设置最大步数，确保不会训练太久
+lr_scheduler_type: cosine
+warmup_ratio: 0.05  # 减少warmup比例
+
+# 优化器参数
+optim: adamw_torch
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# 训练监控
+logging_steps: 20
+save_steps: 100
+
+# 精度和性能
+fp16: true
+
+# 模型保存
+save_safetensors: true

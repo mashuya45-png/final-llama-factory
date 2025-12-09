@@ -1,0 +1,7 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B
+adapter_name_or_path: ./output/my_course_sft
+template: qwen
+
+# Inference arguments
+infer_backend: transformers  # 改为 transformers 而不是 hf

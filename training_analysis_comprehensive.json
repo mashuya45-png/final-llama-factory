@@ -1,0 +1,20 @@
+{
+  "checkpoint_info": {
+    "checkpoint_dir": "./output/alpaca_zh_model/checkpoint-30510",
+    "final_step": 30510,
+    "final_loss": 1.1154
+  },
+  "training_stats": {
+    "initial_loss": 1.6584,
+    "final_loss": 1.1154,
+    "total_improvement": 0.5430000000000001,
+    "improvement_percentage": 32.74240231548482,
+    "total_data_points": 3051
+  },
+  "convergence_analysis": {
+    "early_stage_rate": 1.671035386631719e-05,
+    "late_stage_rate": 1.919947506561681e-05,
+    "convergence_status": "未知",
+    "convergence_ratio": 1.148956821573773
+  }
+}

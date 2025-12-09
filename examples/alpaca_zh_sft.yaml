@@ -1,0 +1,62 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B
+template: qwen
+
+# Data training arguments
+dataset: alpaca_zh_local
+cutoff_len: 1024
+overwrite_cache: true
+
+# Training arguments
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+output_dir: ./output/alpaca_zh_model
+overwrite_output_dir: true
+
+# 优化的训练参数
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 2
+#learning_rate: 2.0e-4
+#num_train_epochs: 5.0
+#max_steps: 30510
+#max_steps: -1
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+# 优化器参数
+optim: adamw_torch
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# 训练监控
+#logging_steps: 10
+#save_steps: 200
+#eval_steps: 200
+#eval_strategy: steps
+# 移除了 evaluation_on_prompt: false
+
+# 精度和性能
+fp16: true
+ddp_timeout: 180000000
+
+# 模型保存
+save_safetensors: true
+# 恢复训练参数
+# 恢复训练参数
+#resume_from_checkpoint: ./output/alpaca_zh_model/checkpoint-24200
+#resume_from_checkpoint: true
+# 在文件末尾添加以下参数
+
+resume_from_checkpoint: ./output/alpaca_zh_model/checkpoint-30510
+num_train_epochs: 2.0  # 再训练2个epoch
+learning_rate: 8.0e-5  # 适当降低学习率
+max_steps: -1
+
+
+dataloader_pin_memory: false    # 减少内存传输
+dataloader_num_workers: 2       # 并行加载数据
+logging_steps: 50    # 从10增加到50，减少日志写入
+save_steps: 500      # 从200增加到500，减少模型保存
+save_total_limit: 2  # 只保留最新的2个检查点

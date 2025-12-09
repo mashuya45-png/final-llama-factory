@@ -1,0 +1,23 @@
+# 模型参数
+model_name_or_path: ./output/alpaca_zh_balanced
+template: qwen
+
+# 数据参数
+dataset: alpaca_zh_local
+val_size: 0.2  # 如果数据集未分割，使用20%作为验证集
+max_eval_samples: 200  # 评估样本数
+
+# 评估参数
+stage: sft
+do_eval: true
+finetuning_type: lora
+output_dir: ./output/eval_results
+
+# 评估配置
+per_device_eval_batch_size: 4
+predict_with_generate: true
+max_new_tokens: 256
+temperature: 0.7
+
+# 指标计算
+compute_metrics: true

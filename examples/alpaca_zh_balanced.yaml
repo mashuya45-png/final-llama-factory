@@ -1,0 +1,41 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B
+template: qwen
+
+# Data training arguments
+dataset: alpaca_zh_local
+cutoff_len: 768  # 适中长度，平衡效果和速度
+overwrite_cache: true
+max_samples: 2000  # 增加样本量，保证多样性
+
+# Training arguments
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: q_proj,k_proj,v_proj,o_proj  # 增加关键层
+output_dir: ./output/alpaca_zh_balanced
+overwrite_output_dir: true
+
+# 平衡的训练参数
+per_device_train_batch_size: 3  # 适中批量
+gradient_accumulation_steps: 3  # 平衡内存和速度
+learning_rate: 2.5e-4  # 适中学习率
+num_train_epochs: 3.0  # 保证基本收敛
+max_steps: 800  # 设置合理上限
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+# 优化器参数
+optim: adamw_torch
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# 训练监控
+logging_steps: 15
+save_steps: 100
+
+# 精度和性能
+fp16: true
+
+# 模型保存
+save_safetensors: true
