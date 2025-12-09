@@ -24,6 +24,14 @@
       "tools": "tools"
     }
   },
+  "alpaca_zh_local": {
+    "file_name": "alpaca_gpt4_data_zh.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
   "mllm_demo": {
     "file_name": "mllm_demo.json",
     "formatting": "sharegpt",
